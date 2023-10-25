@@ -60,6 +60,7 @@ class App {
     }
 
     public function repair($url) {
+        if(is_null($url)) return null;
         for($i=0; $i < count($url); $i++) {
             if(strpos($url[$i],'_')) {
                 $url[$i] = 'NotFound';    
