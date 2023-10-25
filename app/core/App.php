@@ -1,7 +1,7 @@
 <?php
 
 class App {
-    protected $controller = 'Login';
+    protected $controller = 'index';
     protected $method =  'index';
     protected $params= [];
     public function __construct(){
@@ -9,7 +9,8 @@ class App {
         $path = str_replace('index.php', "",$_SERVER['SCRIPT_NAME']);
         $uri = str_replace($path,"",$uri);
         $url = $this->parseUrl($uri);
-        
+        $url = $this->repair($url);
+
         if(is_null($url)){
             require_once "../app/controllers/" . $this->controller . ".php";
             $this->controller = new $this->controller;
@@ -52,6 +53,19 @@ class App {
     }
 
     public function parseUrl($url){
-        if($url) return explode('/', rtrim(filter_var($url,FILTER_SANITIZE_URL),'/'));
+        if($url) {
+          $url =  explode('/', rtrim(filter_var($url,FILTER_SANITIZE_URL),'/'));
+          return $url;
+        } 
+    }
+
+    public function repair($url) {
+        for($i=0; $i < count($url); $i++) {
+            if(strpos($url[$i],'_')) {
+                $url[$i] = 'NotFound';    
+            }
+            $url[$i] = ucfirst(str_replace('-','_',$url[$i]));
+        }
+        return $url;
     }
 }
