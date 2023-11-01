@@ -28,6 +28,7 @@ class Login_penyewa extends Controller {
             'email'=> $user['email'],
             'no_telpon'=> $user['no_telpon'],
             'alamat'=> $user['alamat'],
+            'role' => 'user',
         ];
         Session::set('user',$user);
         Redirect::to('');
