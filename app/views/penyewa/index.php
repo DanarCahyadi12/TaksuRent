@@ -11,5 +11,10 @@
            </div>
         </form>
       </div>
+
+      <div class='col-9 mt-3'>
+        <?php require_once '../app/views/partials/motocycle-card.php' ?>
+      </div>
     </div>
+    
 </section>

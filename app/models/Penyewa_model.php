@@ -1,6 +1,6 @@
 <?php 
 
-class Penyewa_model extends Controller {
+class Penyewa_model{
     private $db;
     public function __construct() {
         $this->db = new Database;
