@@ -8,11 +8,11 @@
         <table>
             <tr>
                 <td>CC </td>
-                <td> :<?= $motocycle['cc'] ?> </td>
+                <td class='fs-6'> :<?= $motocycle['cc'] ?> </td>
             </tr>
             <tr>
-                <td>Status</td>
-                <td> :<?= $status?> </td>
+                <td class='fs-6'>Status</td>
+                <td class='fs-6'> :<?= $status?> </td>
             </tr>
         </table>
         <a href="<?= url('motor/detail/' . $motocycle['id']) ?>" class='btn btn-sm btn-dark mt-3'>Detail</a>

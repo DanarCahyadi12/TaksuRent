@@ -12,7 +12,10 @@
         </form>
       </div>
 
-      <div class='col-9 mt-3'>
+      <?php if(Session::exits('result_motocycles') && count(Session::get('result_motocycles')) == 0):?>
+          <p class='text-center'>Motor yang anda cari tidak ditemukan</p>
+      <?php endif ?>
+      <div class='col-9 mt-3 d-flex gap-2'>
         <?php require_once '../app/views/partials/motocycle-card.php' ?>
       </div>
     </div>

@@ -11,5 +11,11 @@ class Motocycle_model {
         $this->db->execute();
         return $this->db->results();
     }
+
+    public function searchMotocycles($query) {
+        $this->db->query("SELECT * FROM motor WHERE nama LIKE '%$query%'");
+        $this->db->execute();
+        return $this->db->results();
+    }
 }
 ?>
