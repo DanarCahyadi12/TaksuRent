@@ -22,12 +22,7 @@
             <a class="nav-link active" aria-current="page" href="<?= url('login-penyewa'); ?>">Login</a>
           <?php endif ?>
           <?php if(Session::exits('user')): ?>
-            <div class='d-flex align-content-center'>
-              <a class="navbar-brand" aria-current="page" href="<?= url('profile'); ?>">
-                <img src="images/img.jpg" class="rounded-circle" style="width: 40px; height:40px;"alt="Avatar" />
-              </a>
-              <a class="nav-link active" aria-current="page" href="<?= url('logout'); ?>">Logout</a>
-            </div>
+            <a class="nav-link active" aria-current="page" href="<?= url('logout'); ?>">Logout</a>
           <?php endif ?>
         </li>
       </ul>

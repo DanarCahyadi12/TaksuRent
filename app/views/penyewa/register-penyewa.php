@@ -34,5 +34,5 @@
      </div>
     </div>
 </section>
-<script src='js/penyewa.js'></script>
+<script src='../js/penyewa.js'></script>
 <?php require_once "../app/views/templates/Footer.php";?>
