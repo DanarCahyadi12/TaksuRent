@@ -18,7 +18,7 @@ class Login_penyewa extends Controller {
         $hashedPassword = $user['password'];
         $passwordMatch = password_verify($password, $hashedPassword);
         if(!$passwordMatch) {
-            Flasher::setFlasher('Username, email atau password salah','login','error');
+            Flasher::setFlasher('Username, email atau password salah');
             return Redirect::to('login-penyewa');
         }
 

@@ -17,5 +17,12 @@ class Motocycle_model {
         $this->db->execute();
         return $this->db->results();
     }
+
+    public function getDetailMotocycle($id) {
+        $this->db->query('SELECT * FROM motor WHERE id = :id');
+        $this->db->bind('id',$id);
+        $this->db->execute();
+        return $this->db->result();
+    }
 }
 ?>

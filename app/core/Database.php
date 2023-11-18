@@ -47,8 +47,6 @@ class Database{
 
     public function binds(array $datas){
         foreach($datas as $param => $value) {
-            var_dump($param);
-            var_dump($value);
             $this->bind($param,$value);
         }
     }
