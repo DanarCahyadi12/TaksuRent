@@ -1,13 +1,13 @@
 <?php 
 
 class Motor extends Controller {
-    public function detail($id) {
+    public function detail($id = null) {
+        if(is_null($id)) return Redirect::to('');
         $motocycle = $this->model('Motocycle_model')->getDetailMotocycle($id);
-        $datas['title'] = 'Detail motor';
-        $this->view('templates/header', $datas);
-        if(!$motocycle) return $this->view('notfound');
-        $this->view('penyewa/detail-motor', $datas);
-        $this->view('templates/footer', $datas);
+            $datas['title'] = 'Detail motor';
+            $datas['motocycle'] = $motocycle;
+            $this->view('penyewa/detail-motor', $datas);
+        
     }
 
 }
