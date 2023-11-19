@@ -1,3 +1,5 @@
+
+<?php require_once "../app/views/templates/penyewa/Heacder.php";?>
 <div class='container-fluid'>
     <div class='row justify-content-center align-content-center' style='height:100vh;'>
         <div class='col-8 mb-3'>
@@ -24,3 +26,5 @@
     </div>
 </div>
 
+
+<?php require_once "../app/views/templates/penyewa/Footer.php";?>

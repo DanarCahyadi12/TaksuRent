@@ -1,3 +1,4 @@
+<?php require_once "../app/views/templates/penyewa/Header.php";?>
 <section class='container-fluid'>
     <?php require_once '../app/views/partials/navbar.php'; ?>
     <div class='row justify-content-center'>
@@ -21,3 +22,5 @@
     </div>
     
 </section>
+
+<?php require_once "../app/views/templates/penyewa/Footer.php";?>

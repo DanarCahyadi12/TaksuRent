@@ -1,4 +1,4 @@
-<?php require_once "../app/views/templates/Header.php";?>
+<?php require_once "../app/views/templates/penyewa/Header.php";?>
 
 <section class="container-fluid">
     <div class="row justify-content-center align-items-center w-75 bg-white m-auto gap-5 mt-5">
@@ -35,4 +35,4 @@
     </div>
 </section>
 <script src='../js/penyewa.js'></script>
-<?php require_once "../app/views/templates/Footer.php";?>
+<?php require_once "../app/views/templates/penyewa/Footer.php";?>

@@ -1,13 +1,13 @@
 const opsi = document.getElementById('opsi')
 const lamaSewa = document.getElementById('lama-sewa')
 const hargaInput = document.getElementById('price')
+const checkbox = document.getElementById('checkbox')
+const sewaBtn= document.getElementById('sewa-button')
 
-let html = ''
-for(let i = 1; i <= 31; i++) {
-    html += `<option value="${i} hari">${i} hari</option>`
-}
-hargaInput.value = 'Rp 80.000'
-lamaSewa.innerHTML = html;
+harian()
+checkbox.addEventListener('change', function() {
+    this.checked ? sewaBtn.removeAttribute('disabled') : sewaBtn.setAttribute('disabled', true) 
+})
 opsi.addEventListener('change', function() {
     const value = opsi.value;
     switch(value) {
@@ -35,7 +35,10 @@ lamaSewa.addEventListener('change', function() {
  function harian()  {
     lamaSewa.innerHTML = ''
     hargaInput.value = 'Rp 80.000'
-    for(let i = 1; i <= 31; i++) {
+    const currentMonth = new Date().getMonth() + 1
+    const numDays = new Date(new Date().getFullYear(), currentMonth, 0).getDate()
+    console.log(numDays);
+    for(let i = 1; i <= numDays; i++) {
         lamaSewa.innerHTML += `<option value="${i}">${i} hari</option>`
     }
 }
@@ -47,7 +50,7 @@ lamaSewa.addEventListener('change', function() {
     }
 }
  function mingguan()  {
-    hargaInput.value = 'Rp 800.000'
+    hargaInput.value = 'Rp 400.000'
     lamaSewa.innerHTML = ''
     for(let i = 1; i <= 4; i++) {
         lamaSewa.innerHTML += `<option value="${i}">${i} minggu</option>`

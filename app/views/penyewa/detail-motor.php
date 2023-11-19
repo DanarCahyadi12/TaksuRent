@@ -1,6 +1,6 @@
-<?php require_once "../app/views/templates/Header.php";?>
+<?php require_once "../app/views/templates/penyewa/Header.php";?>
 
-<section class='container-fluid'>
+<section class='container-fluid mb-3'>
 <?php require_once '../app/views/partials/navbar.php'; ?>
     <div class='w-75  m-auto mt-5'>
         <div class="row">
@@ -41,7 +41,7 @@
                 </div> 
             </div>
             <div>
-                <h2 class='fw-bold'>Ketentuan</h2>
+                <h2 class='fw-bold mt-4'>Ketentuan</h2>
                 <h6 class='fw-bold'>Kehilangan kunci :</h6>
                 <ul>
                     <li>Biasa: 50rb</li>
@@ -58,8 +58,8 @@
                     <li>Kehilangan kendaraan, pihak penyewa harus mengganti unit dengan spesifikasi minimal sama, atau dalam bentuk uang, seharga kendaraan menurut harga pasaran, yang nominalnya akan ditentukan oleh penyedia</li>
                 </ul>
                 <div>
-                    <form method="POST" action="<?= url('motor/sewa') ?>" enctype="multipart/form-data">
-                        <h4>Pilih lama sewa</h4>
+                    <form method="POST" action="<?= url('motor/sewa/' . $datas['motocycle']['id']) ?>" enctype="multipart/form-data">
+                        <h4 class="mt-2">Pilih lama sewa</h4>
                         <div class="d-flex gap-3">
                             <select id='opsi' name="opsi">
                                 <option value="hari">Harian</option>
@@ -71,17 +71,25 @@
                         </div>
                         <div class='mt-5'>
                             <h3>Input data diri</h3>
-                            <input type='text' name='nama_lengkap' placeholder="Nama lengkap" class='p-2' style='width:100%;'>
+                            <input required type='text' name='nama_lengkap' placeholder="Nama lengkap" class='p-2' style='width:100%;'>
                             <div class='mt-3 d-flex flex-column'>
                                 <label>Jaminan (KTP)</label>
-                                <input type='file' name="ktp">
+                                <input required type='file' name="ktp" accept=".jpg , .png , .jpeg">
                             </div>
                             <div class='mt-3 d-flex flex-column'>
                                 <label>SIM</label>
-                                <input type='file' name="sim">
+                                <input required type='file' name="sim" accept=".jpg , .png , .jpeg">
                             </div>
                         </div>
-                        <button type='submit' class='btn btn-dark mt-3'>Sewa</button>
+                        <div class='mt-3 d-flex'>
+                            <input type="checkbox" id='checkbox'> <p class='mt-3 mx-2' >Saya menyetujui ketentuan yang berlaku</p>
+                        </div>
+                        <?php if($datas['motocycle']['status']): ?>
+                            <button type='submit' class='btn btn-dark mt-3' disabled>Motor sudah disewa</button>
+                        <?php endif ?>
+                        <?php if(!$datas['motocycle']['status']): ?>
+                            <button type='submit' class='btn btn-dark mt-3' id="sewa-button" disabled>Sewa</button>
+                        <?php endif ?>
                     </form>
                 </div>
             </div> 
@@ -89,4 +97,4 @@
     </div>
 </section>
 <script src="../../js/detail-motor.js"> </script>
-<?php require_once "../app/views/templates/Footer.php";?>
+<?php require_once "../app/views/templates/penyewa/Footer.php";?>
