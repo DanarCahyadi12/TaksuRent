@@ -28,7 +28,6 @@ class Motor extends Controller {
         $lama_sewa = $_POST['lama_sewa'];
         $currentDate = date('Y-m-d');
         $path = str_replace('index.php', '', $_SERVER['PHP_SELF']);
-        $dir = __DIR__;
         $ktpDir = "../public/ktp";
         $simDir = "../public/sim";
         $price  = $this->convertPriceToInteger($_POST['price']);

@@ -1,4 +1,4 @@
-<?php require_once "../app/views/templates/Header.php";?>
+<?php require_once "../app/views/templates/users/Header.php";?>
 
 <section class="container-fluid">
     <div class="row justify-content-center align-items-center w-75 bg-white m-auto gap-5 mt-5 vh-100">
@@ -11,7 +11,7 @@
      </div>
      <div class="col-8 bg-white rounded-3 p-5 shadow-lg rounded">
         <?php Flasher::getFlasher()?>
-        <form action="<?= url('login-admin/login') ?>" method="post">
+        <form action="<?= url('login-operator/login') ?>" method="post">
         <div class='mb-4'>
             <input class='p-2' style='width:100%;' name='email_username' type='text' placeholder="email atau username" required>
           </div>
@@ -27,4 +27,4 @@
     </div>
 </section>
 <script src='js/admin.js'></script>
-<?php require_once "../app/views/templates/Footer.php";?>
+<?php require_once "../app/views/templates/users/Footer.php";?>
