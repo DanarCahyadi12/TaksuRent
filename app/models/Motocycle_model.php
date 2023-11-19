@@ -24,5 +24,12 @@ class Motocycle_model {
         $this->db->execute();
         return $this->db->result();
     }
+
+    public function updateMotocycleToRented($id) {
+        $this->db->query('UPDATE motor SET status = 1 WHERE id = :id');
+        $this->db->bind('id',$id);
+        $this->db->execute();
+        return $this->db->result();
+    }
 }
 ?>

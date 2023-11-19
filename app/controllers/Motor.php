@@ -28,10 +28,21 @@ class Motor extends Controller {
         $lama_sewa = $_POST['lama_sewa'];
         $currentDate = date('Y-m-d');
         $path = str_replace('index.php', '', $_SERVER['PHP_SELF']);
-        $ktpURL = $this->getKtpUrl($path);
-        $simURL = $this->getSimUrl($path);
         $dir = __DIR__;
-        $dir = str_replace('app\\controllers', 'public\\images',$dir);
+        $ktpDir = "../public/ktp";
+        $simDir = "../public/sim";
+        $price  = $this->convertPriceToInteger($_POST['price']);
+        $ktpFile = $_FILES['ktp']['tmp_name'];
+        $ktpFilename = $_FILES['ktp']['name'];
+        $simFile = $_FILES['sim']['tmp_name'];
+        $simFilename = $_FILES['sim']['name'];
+        $newSimFilename = time() . '-' . $simFilename;
+        $newKtpFilename = time() . '-' . $ktpFilename;
+        $ktpURL = $this->getKtpUrl($path, $newKtpFilename);
+        $simURL = $this->getSimUrl($path, $newSimFilename);
+
+        move_uploaded_file($ktpFile,$ktpDir . '/' . $newKtpFilename );
+        move_uploaded_file($simFile,$simDir . '/' . $newSimFilename) ;
         switch($option) {
             case 'hari' : $days = $lama_sewa;
                 break;
@@ -50,12 +61,18 @@ class Motor extends Controller {
             'tanggal_disewa' => $currentDate,
             'tanggal_dikembalikan' => $tanggal_dikembalikan,
             'lama_sewa' => $lama_sewa,
-            ''
-
-
+            'status' => null,
+            'harga_sewa' => $price,
+            'id_motor' => $id,
+            'id_penyewa' => $userID,
         ];
 
-        var_dump($_POST);
+        $result = $this->model('Transaksi_model')->create($datas);
+        if($result) {
+            $this->model('Motocycle_model')->updateMotocycleToRented($id);
+            Flasher::setFlasher('<p>Transaksi anda sedang diproses. Mohon tunggu balasan dari operator</p>');
+            return Redirect::to('transaksi');
+        }
         
     }
 
@@ -69,14 +86,18 @@ class Motor extends Controller {
         return intval($lastMonth) * $numDaysInMonth;
     }
 
-    private function getKtpUrl($path) {
-        return getProtocol() .  '://' . $_SERVER['HTTP_HOST'] .$path . 'images/' . $_FILES['ktp']['name'];
+    private function getKtpUrl($path,$ktp) {
+        return getProtocol() .  '://' . $_SERVER['HTTP_HOST'] .$path . 'ktp/' . $ktp ;
     }
 
-    private function getSimUrl($path) {
-        return getProtocol() .  '://' . $_SERVER['HTTP_HOST'] .$path . 'images/' . $_FILES['sim']['name'];
+    private function getSimUrl($path, $sim) {
+        return getProtocol() .  '://' . $_SERVER['HTTP_HOST'] .$path . 'sim/' . $sim ;
     }
 
+    private function convertPriceToInteger($price) {
+        $price = explode(' ',$price)[1];
+        return intval(str_replace('.','',$price));
+    }
 
     // private function 
 

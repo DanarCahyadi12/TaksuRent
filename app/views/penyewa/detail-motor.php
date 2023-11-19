@@ -67,7 +67,7 @@
                                 <option value="bulan">Bulanan</option>
                             </select>
                             <select id='lama-sewa' name="lama_sewa"></select>
-                            <input type="text" id='price' disabled>
+                            <input type="text" id='price' name="price" readonly>
                         </div>
                         <div class='mt-5'>
                             <h3>Input data diri</h3>
