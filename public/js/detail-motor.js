@@ -23,7 +23,7 @@ opsi.addEventListener('change', function() {
 lamaSewa.addEventListener('change', function() {
     const value = opsi.value;
     switch(value) {
-        case 'hari': hargaInput.value = `Rp ${new Intl.NumberFormat('id-ID').format(parseInt(this.value) * 8000)}`
+        case 'hari': hargaInput.value = `Rp ${new Intl.NumberFormat('id-ID').format(parseInt(this.value) * 80000)}`
             break;
         case 'minggu': hargaInput.value = `Rp ${new Intl.NumberFormat('id-ID').format(parseInt(this.value) * 400000)}`
             break;

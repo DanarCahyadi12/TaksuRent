@@ -11,20 +11,20 @@
      </div>
      <div class="col-8 bg-white rounded-3 p-5 shadow-lg rounded">
         <?php Flasher::getFlasher()?>
-        <form action="<?= url('login-operator/login') ?>" method="post">
+        <form action="<?= url('login/login') ?>" method="post">
         <div class='mb-4'>
-            <input class='p-2' style='width:100%;' name='email_username' type='text' placeholder="email atau username" required>
+            <input class='p-2' style='width:100%;' id="email-username" name='email_username' type='text' placeholder="email atau username" required>
           </div>
           <div class='mb-4'>
             <input class='p-2' style='width:100%;' name='password' type='password' placeholder="password" required>
           </div>
           <div class='form-footer'>
               <button type='submit' class='btn btn-dark me-3'>Login</button>
-              <a href="register-operator">Belum mempunyai akun?</a>
+              <a href="register">Belum mempunyai akun?</a>
           </div>
         </form>
      </div>
     </div>
 </section>
-<script src='js/admin.js'></script>
+<script src='<?= url('js/operator.js') ?>'></script>
 <?php require_once "../app/views/templates/users/Footer.php";?>

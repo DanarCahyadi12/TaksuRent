@@ -13,6 +13,10 @@ class Login_penyewa extends Controller {
         $password = $_POST['password'];
 
         $user = $this->model('Penyewa_model')->findOneByEmailOrUsername($usernameOrEmail);
+        if(!$user) {
+            Flasher::setFlasher('<p class="text-danger">Username, email atau password salah</p>');
+            return Redirect::to('login-penyewa');
+        }
         $hashedPassword = $user['password'];
         $passwordMatch = password_verify($password, $hashedPassword);
         if(!$passwordMatch) {

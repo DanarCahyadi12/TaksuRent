@@ -5,8 +5,8 @@ class Users_model {
     public function __construct() {
         $this->db = new Database;
     }
-    public function findOneOperatorByEmailOrUsername($emailOrUsername) {
-        $this->db->query('SELECT * FROM users WHERE email = :emailOrUsername OR username = :emailOrUsername AND level = 0');
+    public function findOneByEmailOrUsername($emailOrUsername) {
+        $this->db->query('SELECT * FROM users WHERE email = :emailOrUsername OR username = :emailOrUsername');
         $this->db->bind('emailOrUsername',$emailOrUsername);
         $this->db->execute();
         return $this->db->result();
@@ -24,7 +24,7 @@ class Users_model {
         return $this->db->result();
     }
 
-    public function createOperator($datas) {
+    public function create($datas) {
         $this->db->query('INSERT INTO users (username,email,level,password) VALUES (:username, :email,:role, :password)');
         $this->db->binds($datas);   
         return $this->db->execute();

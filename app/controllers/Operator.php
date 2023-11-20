@@ -5,7 +5,7 @@ class Operator extends Controller {
 
         if(!Auth::operator()) {
             Flasher::setFlasher('<p class="text-danger">Silahkan login pada akun anda terlebih dahulu</p>');
-            return Redirect::to('login-operator');
+            return Redirect::to('login');
         }
         $datas['title'] = "Operator Page";
         $datas['transaksi'] = $this->model('Transaksi_model')->getMany();
@@ -23,8 +23,13 @@ class Operator extends Controller {
     }
 
     public function logout() {
-        Session::destroy('operator');
-        return Redirect::to('login-operator');
+        if(Session::get('operator')) {
+            Session::destroy('operator');
+        }
+        if(Session::get('admin')){
+            Session::destroy('admin');
+        }
+        return Redirect::to('login');
     }
 
 }

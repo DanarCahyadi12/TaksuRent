@@ -10,7 +10,7 @@
         </div>
         <div class="col-8 bg-white rounded-3 p-5 shadow-lg rounded">
             <?php Flasher::getFlasher()?>
-            <form action="<?= url('register-operator/register') ?>" method="post">
+            <form action="<?= url('register/register') ?>" method="post">
                 <div class='mb-4'>
                     <input class='p-2' id="username" style='width:100%;' name='username' type='text' placeholder="Username" required>
                 </div>
@@ -37,10 +37,11 @@
                 
                 <div class='form-footer'>
                     <button type='submit' class='btn btn-dark me-3'>Register</button>
-                    <a href="login-operator">Sudah mempunyai akun?</a>
+                    <a href="login">Sudah mempunyai akun?</a>
                 </div>
             </form>
         </div>
     </div>
 </section>
+<script src="js/operator.js"></script>
 <?php require_once "../app/views/templates/users/Footer.php";?>
