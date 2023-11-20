@@ -22,13 +22,13 @@
                 </div>
                 <div class="d-flex mb-4">
                     <div class="form-check me-5">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <input class="form-check-input" type="radio" name="role" value="1" id="flexRadioDefault1">
                         <label class="form-check-label" for="flexRadioDefault1">
                             Admin
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                        <input class="form-check-input" type="radio" name="role" value="0" id="flexRadioDefault2" checked>
                         <label class="form-check-label" for="flexRadioDefault2">
                             Operator
                         </label>

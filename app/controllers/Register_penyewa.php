@@ -28,7 +28,15 @@ class Register_penyewa extends Controller {
             return Redirect::to('register-penyewa');
         }
 
-        $result =  $this->model('Penyewa_model')->createPenyewa($_POST);
+        $hashedPassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
+        $datas = [
+            'username' => $_POST['username'],
+            'email' => $_POST['email'],
+            'no_telpon' => $_POST['no_telpon'],
+            'password' => $hashedPassword,
+            'alamat' => $_POST['alamat'],
+        ];
+        $result =  $this->model('Penyewa_model')->createPenyewa($datas);
         if($result) {
             $redirectURL = url('login-penyewa');
             Flasher::setFlasher("<p class='text-success'> Register berhasil. Silahkan <a href='$redirectURL'>login</a> pada akun anda </p>");

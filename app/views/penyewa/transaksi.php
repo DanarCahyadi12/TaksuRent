@@ -53,22 +53,24 @@
         <h1 class="modal-title fs-5" id="exampleModalLabel">Detail transaksi</h1>
       </div>
       <div class="modal-body">
-        <div class="row">
-         <div clas="col">
-            s
-         </div>
-         <div class="col">
-i
-         </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">.col-md-4</div>
+      <div class="col-md-4 ms-auto">.col-md-4 .ms-auto</div>
+    </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Kembali</button>
-
+    
       </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
 <?php require_once "../app/views/templates/penyewa/Footer.php";?>

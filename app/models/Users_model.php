@@ -25,9 +25,10 @@ class Users_model {
     }
 
     public function createOperator($datas) {
-        $this->db->query('INSERT INTO users (username,email,level,password) VALUES (:username, :email,:level, :password');
+        $this->db->query('INSERT INTO users (username,email,level,password) VALUES (:username, :email,:role, :password)');
         $this->db->binds($datas);   
         return $this->db->execute();
 
     }
+
 }

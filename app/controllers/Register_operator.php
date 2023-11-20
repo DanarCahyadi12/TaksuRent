@@ -5,4 +5,36 @@ class Register_operator extends Controller {
         $datas['title'] = 'Register sebagai operator   ';
         $this->view('backoffice/operator/register-operator', $datas);
     }
+
+    public function register() {
+        if(count($_POST) == 0) return Redirect::to('register-operator');
+        $user = $this->model('Users_model')->findOneByUsername($_POST['username']);
+        if($user) {
+            Flasher::setFlasher('<p class="text-danger">Username sudah terdaftar</p>');
+            return Redirect::to('register-operator');
+        }
+        $user = $this->model('Users_model')->findOneByEmail($_POST['email']);
+        if($user) {
+            Flasher::setFlasher('<p class="text-danger">Email sudah terdaftar</p>');
+            return Redirect::to('register-operator');
+        }
+        if(strlen($_POST['password']) < 8) {
+            Flasher::setFlasher('<p class="text-danger">Password harus lebih dari 8 karakter</p>');
+            return Redirect::to('register-operator');
+        }
+        
+        $hashedPassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
+        $datas = [
+            'username' => $_POST['username'],
+            'email' => $_POST['email'],
+            'password' => $hashedPassword,
+            'role' => $_POST['role'],
+        ];
+        $result =  $this->model('Users_model')->createOperator($datas);
+        if($result) {
+            $redirectURL = url('login-operator');
+            Flasher::setFlasher("<p class='text-success'> Register berhasil. Silahkan <a href='$redirectURL'>login</a> pada akun anda </p>");
+            return Redirect::to('register-operator');
+        }
+    }
 }
