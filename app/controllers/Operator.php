@@ -26,10 +26,6 @@ class Operator extends Controller {
         if(Session::get('operator')) {
             Session::destroy('operator');
         }
-        if(Session::get('admin')){
-            Session::destroy('admin');
-        }
-        return Redirect::to('login');
     }
 
 }
