@@ -29,7 +29,6 @@ class Penyewa_model{
         $this->db->execute();
         return $this->db->result();
     }
-
     public function createPenyewa($datas) {
         $this->db->query('INSERT INTO penyewa (username,email,password,no_telpon,alamat) VALUES (:username, :email, :password, :no_telpon,:alamat)');
         $this->db->binds($datas);   

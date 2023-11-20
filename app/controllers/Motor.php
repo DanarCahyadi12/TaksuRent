@@ -28,7 +28,6 @@ class Motor extends Controller {
         $lama_sewa = $_POST['lama_sewa'];
         $currentDate = date('Y-m-d');
         $path = str_replace('index.php', '', $_SERVER['PHP_SELF']);
-        $dir = __DIR__;
         $ktpDir = "../public/ktp";
         $simDir = "../public/sim";
         $price  = $this->convertPriceToInteger($_POST['price']);
@@ -68,8 +67,8 @@ class Motor extends Controller {
         ];
 
         $result = $this->model('Transaksi_model')->create($datas);
+        $this->model('Motocycle_model')->updateMotocycleToRented($id);
         if($result) {
-            $this->model('Motocycle_model')->updateMotocycleToRented($id);
             Flasher::setFlasher('<p>Transaksi anda sedang diproses. Mohon tunggu balasan dari operator</p>');
             return Redirect::to('transaksi');
         }
@@ -78,7 +77,6 @@ class Motor extends Controller {
 
     private function convertWeekToDays($week) {
         $weeks = explode(' ', $week)[0];
-        echo $weeks;
         return intval($weeks) * 7;
     }
     private function convertMonthToDays($month, $currentYear, $lastMonth) {
