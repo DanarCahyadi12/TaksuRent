@@ -22,4 +22,9 @@ class Operator extends Controller {
         }
     }
 
+    public function logout() {
+        Session::destroy('operator');
+        return Redirect::to('login-operator');
+    }
+
 }
