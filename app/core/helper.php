@@ -15,3 +15,7 @@ function formatDate($date) {
     $month = explode('-',$date)[1];
     return explode('-',$date)[2] ." ". $months[$month-1] ." " . explode('-',$date)[0];
 }
+
+function formatToRupiah($number) {
+    return 'Rp ' . number_format($number, 0, ',', '.');
+}
