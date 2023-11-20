@@ -3,7 +3,7 @@
 class Register extends Controller {
     public function index() {
         $datas['title'] = 'Register sebagai operator   ';
-        $this->view('backoffice/operator/register-operator', $datas);
+        $this->view('backoffice/register', $datas);
     }
 
     public function register() {
