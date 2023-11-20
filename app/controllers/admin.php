@@ -4,12 +4,16 @@ class Admin extends Controller
 {
     public function index()
     {
+        if(!Auth::admin()) {
+            Flasher::setFlasher('<p class="text-danger">Silahkan login pada akun anda terlebih dahulu</p>');
+            return Redirect::to('login');
+        }
         $datas['title'] = "Taksu rent | sewa motor";
         $datas['motocycles'] = $this->getMotocycle();
-        $this->view('templates/header', $datas);
+        $this->view('templates/users/admin-header', $datas);
         $this->view('admin/navbar');
         $this->view('admin/motor', $datas);
-        $this->view('templates/footer');
+        $this->view('templates/users/footer');
     }
 
     private function getMotocycle()
@@ -17,89 +21,24 @@ class Admin extends Controller
         $motocycles = $this->model('Motocycle_model')->findManyMotocycle();
         return $motocycles;
     }
-    public function login()
-    {
-        $datas['title'] = "Login sebagai admin";
-        $this->view('templates/header', $datas);
-        $this->view('admin/loginAdmin');
-        $this->view('templates/footer');
+
+   
+
+
+   
+
+    public function logout() {
+        Session::destroy('admin');
+        return Redirect::to('login');
     }
-
-    public function authentication()
-    {
-        if (count($_POST) == 0) return Redirect::to('admin');
-
-        $usernameOrEmail = $_POST['email_username'];
-        $password = $_POST['password'];
-
-        $admin = $this->model('Admin_model')->findOneByEmailOrUsername($usernameOrEmail);
-        $hashedPassword = $admin['password'];
-        $passwordMatch = password_verify($password, $hashedPassword);
-        if (!$passwordMatch) {
-            Flasher::setFlasher('Username, email atau password salah', 'login', 'error');
-            return Redirect::to('admin');
-        }
-
-        $admin = [
-            'id' => $admin['id'],
-            'username' => $admin['username'],
-            'email' => $admin['email'],
-            'level' => $admin['level'],
-        ];
-        Session::set('user', $admin);
-        if ($admin['level'] == 1) {
-            Redirect::to('admin/motor');
-        }
-    }
-
-    public function register()
-    {
-        $datas['title'] = "Register";
-        $this->view('templates/header', $datas);
-        $this->view('admin/register');
-        $this->view('templates/footer');
-    }
-
-    public function storeRegister()
-    {
-        if (isset($_POST['submit'])) {
-            $inputUsername = htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8');
-            $inputEmail = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8');
-            $inputLevel = htmlspecialchars($_POST['level'], ENT_QUOTES, 'UTF-8');
-            $inputPassword = htmlspecialchars($_POST['password'], ENT_QUOTES, 'UTF-8');
-
-            $adminModel = $this->model('Admin_model');
-
-            $checkUsername = $adminModel->findOneByEmailOrUsername($inputUsername);
-            $checkEmail = $adminModel->findOneByEmailOrUsername($inputEmail);
-
-            if ($checkUsername && $checkEmail) {
-                Flasher::setFlasher('Username, email sudah digunakan', 'register', 'error');
-                Redirect::to('admin/register');
-                die();
-            }
-
-            $hashedPassword = password_hash($inputPassword, PASSWORD_DEFAULT);
-
-            $data = [
-                'username' => $inputUsername,
-                'email' => $inputEmail,
-                'level' => $inputLevel,
-                'password' => $hashedPassword
-            ];
-
-            $result = $adminModel->addAdmin($data);
-
-            $result == true ? Flasher::setFlasher("<p class= 'text-success'> Register berhasil silahkan login</p>", '', 'success') : Flasher::setFlasher('<p class="text-danger"> Register gagal</p>', '', 'error');
-
-            Redirect::to('admin/login');
-        }
-    }
-
 
 
     public function detail($id)
     {
+        if(!Auth::admin()) {
+            Flasher::setFlasher('<p class="text-danger">Silahkan login pada akun anda terlebih dahulu</p>');
+            return Redirect::to('login');
+        }
         $datas['title'] = "Taksu rent | sewa motor";
         $datas['motocycle'] = $this->getMotocycleById($id);
         $this->view('templates/header', $datas);
@@ -116,6 +55,10 @@ class Admin extends Controller
 
     public function tambah()
     {
+        if(!Auth::admin()) {
+            Flasher::setFlasher('<p class="text-danger">Silahkan login pada akun anda terlebih dahulu</p>');
+            return Redirect::to('login');
+        }
         $datas['title'] = "Taksu rent | sewa motor";
         $this->view('templates/header', $datas);
         $this->view('admin/navbar');
@@ -125,6 +68,10 @@ class Admin extends Controller
 
     public function storeTambah()
     {
+        if(!Auth::admin()) {
+            Flasher::setFlasher('<p class="text-danger">Silahkan login pada akun anda terlebih dahulu</p>');
+            return Redirect::to('login');
+        }
         if (isset($_POST['submit'])) {
             $merek = htmlspecialchars($_POST['merek'], ENT_QUOTES, 'UTF-8');
             $tipe = htmlspecialchars($_POST['tipe'], ENT_QUOTES, 'UTF-8');
@@ -155,7 +102,7 @@ class Admin extends Controller
             $datas['url'] = $path;
 
             $result = $this->model('Motocycle_model')->addMotocycles($datas);
-            $result == true ? Flasher::setFlasher("<p class= 'text-success'> Motor berhasil di tambahkan</p>", '', 'success') : Flasher::setFlasher('<p class="text-danger"> Motor tidak berhasil di tambahkan</p>', '', 'error');
+            $result == true ? Flasher::setFlasher("<p class= 'text-success'> Motor berhasil di tambahkan</p>") : Flasher::setFlasher('<p class="text-danger"> Motor tidak berhasil di tambahkan</p>');
 
             Redirect::to('admin');
         }
@@ -165,6 +112,10 @@ class Admin extends Controller
 
     public function edit($id)
     {
+        if(!Auth::admin()) {
+            Flasher::setFlasher('<p class="text-danger">Silahkan login pada akun anda terlebih dahulu</p>');
+            return Redirect::to('login');
+        }
         $datas['title'] = "Taksu rent | sewa motor";
         $datas['motocycle'] = $this->getMotocycleById($id);
         $this->view('templates/header', $datas);
@@ -175,6 +126,10 @@ class Admin extends Controller
 
     public function storeUpdate()
     {
+        if(!Auth::admin()) {
+            Flasher::setFlasher('<p class="text-danger">Silahkan login pada akun anda terlebih dahulu</p>');
+            return Redirect::to('login');
+        }
         if (isset($_POST['submit'])) {
             $ids = $_POST['id'];
 

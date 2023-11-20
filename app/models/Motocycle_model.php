@@ -18,11 +18,15 @@ class Motocycle_model {
         return $this->db->results();
     
     }
-    public function findByIdMotocycles($datas) {
-        $this->db->query("SELECT * FROM motor WHERE id = $datas");
+
+
+    public function getDetailMotocycle($id) {
+        $this->db->query('SELECT * FROM motor WHERE id = :id');
+        $this->db->bind('id',$id);
         $this->db->execute();
         return $this->db->result();
     }
+
 
     public function addMotocycles($datas) {
         $this->db->query('INSERT INTO motor (merk, tipe, nama, cc, transmisi, harga, url, id_admin, status) 
@@ -54,5 +58,12 @@ class Motocycle_model {
         return $this->db->execute();
     }
     
+
+    public function updateMotocycleToRented($id) {
+        $this->db->query('UPDATE motor SET status = 1 WHERE id = :id');
+        $this->db->bind('id',$id);
+        $this->db->execute();
+        return $this->db->result();
+    }
 }
 ?>

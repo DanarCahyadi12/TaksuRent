@@ -1,11 +1,7 @@
 <section class="content">
     <h2> Update </h2>
     <?php
-    if (Flasher::exits()) {
-        $message = Flasher::getFlasher()['message'];
-        echo $message;
-        Flasher::destroyFlasher();
-    }
+        Flasher::getFlasher()
     ?>
     <div class="tambah-form">
             <form action="<?= url('admin/storeUpdate') ?>" method="post" enctype="multipart/form-data" >

@@ -26,6 +26,6 @@
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-dark" type="submit"><i class="bi bi-search"></i></button>
     </form>
-    <button class="btn btn-dark">Logout</button>
+    <a href="<?= url('admin/logout') ?>" class="btn btn-dark">Logout</a>
     </div>
 </section>
