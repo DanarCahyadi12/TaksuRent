@@ -16,5 +16,13 @@ class Transaksi_model {
         
 
     }
+
+    public function getTransaction($id) {
+        $query = 'SELECT transaksi.*, motor.nama FROM transaksi INNER JOIN motor ON motor.id = transaksi.id_motor WHERE id_penyewa = :id_penyewa ';
+        $this->db->query($query);
+        $this->db->bind('id_penyewa', $id);
+        $this->db->execute();
+        return $this->db->results();
+    }
 }
 ?>
