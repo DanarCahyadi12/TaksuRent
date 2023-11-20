@@ -8,8 +8,10 @@ class Operator extends Controller {
             return Redirect::to('login-operator');
         }
         $datas['title'] = "Operator Page";
+        $datas['transaksi'] = $this->model('Transaksi_model')->getMany();
+        $datas['operator'] = Auth::operator();
         $this->view('templates/users/header',$datas);
-        $this->view('backoffice/operator/index');
+        $this->view('backoffice/operator/index', $datas);
         $this->view('templates/users/footer');
     }
 
@@ -18,6 +20,11 @@ class Operator extends Controller {
         if(is_null($id)) {
             return Redirect::to('operator');
         }
+    }
+
+    public function logout() {
+        Session::destroy('operator');
+        return Redirect::to('login-operator');
     }
 
 }

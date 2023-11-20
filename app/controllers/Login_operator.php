@@ -27,7 +27,7 @@ class Login_operator extends Controller {
             'email'=> $user['email'],
             'no_telpon'=> $user['no_telpon'],
             'alamat'=> $user['alamat'],
-            'role' => 'operaotr',
+            'role' => 'operator',
         ];
         Session::set('operator',$user);
         Redirect::to('operator');

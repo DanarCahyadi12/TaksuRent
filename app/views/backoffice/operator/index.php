@@ -64,17 +64,14 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Bobi</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> <?= $datas['operator']['username'] ?></span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
+                                <a href="<?= url('operator/logout') ?>"  class="dropdown-item" data-target="#logoutModal">Logout</a>
                             </div>
                         </li>
 
@@ -88,7 +85,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Welcome Back Operator Bobi!</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Welcome Back Operator  <?= $datas['operator']['username'] ?>!</h1>
                     </div>
 
                     <!-- Content Row -->
@@ -108,16 +105,31 @@
                                         </thead>
                                         
                                         <tbody>
-                                            <tr>
-                                                <td>I Ketut Danar Cahyadi</td>
-                                                <td>10 Feb 2023</td>
-                                                <td>Pending</td>
+                                            <?php foreach($datas['transaksi'] as $transaksi): ?>
+                                                <?php $status = null ?>
+                                                <?php 
+                                                 if(is_null($transaksi['status'])) {
+                                                    $status = 'Pending';
+                                                 }
+                                                 else if($transaksi['status'] == 1) { 
+                                                    $status = 'Sukses';
+                                                 }
+                                                 else{
+                                                    $status = 'Gagal';
+                                                 }
+                                                ?>
+                                                <tr>
+                                                <td><?= $transaksi['nama_lengkap'] ?></td>
+                                                <td><?= formatDate($transaksi['tanggal_disewa']) ?></td>
+                                                <td><?= $status ?></td>
                                                 <td>
                                                     <a href="#" class="btn btn-secondary rounded-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                         <span class="text">Detail</span>
                                                     </a>
                                                 </td>
                                             </tr>
+                                            <?php endforeach ?>
+                                           
                                             
                                         </tbody>
                                     </table>
