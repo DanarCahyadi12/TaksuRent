@@ -20,7 +20,7 @@
           </div>
           <div class='form-footer'>
               <button type='submit' class='btn btn-dark me-3'>Login</button>
-              <a href="login-admin">Belum mempunyai akun?</a>
+              <a href="register-operator">Belum mempunyai akun?</a>
           </div>
         </form>
      </div>
